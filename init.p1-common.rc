@@ -93,6 +93,12 @@ service pvrsrvinit /system/bin/pvrsrvinit
     group root
     oneshot
 
+service pvrsrvctl /system/bin/pvrsrvctl --start --no-module
+	class core
+	user root
+	group root
+	oneshot
+
 # set device specific MAC addresses, depends on preceding start of rild
 service set-macaddr /system/vendor/bin/set-macaddr
     user root
