@@ -32,6 +32,11 @@ PRODUCT_COPY_FILES += \
 	device/samsung/p1-common/init.usb.rc:recovery/root/init.usb.rc \
 	device/samsung/p1-common/lpm.rc:root/lpm.rc
 
+# hax
+PRODUCT_COPY_FILES += \
+	device/samsung/p1-common/init.rc:root/init.rc \
+	device/samsung/p1-common/init.trace.rc:root/init.trace.rc
+
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/p1-common/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
