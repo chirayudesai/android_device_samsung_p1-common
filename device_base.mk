@@ -28,8 +28,8 @@ PRODUCT_COPY_FILES := \
 # Init files
 PRODUCT_COPY_FILES += \
 	device/samsung/p1-common/init.p1-common.rc:root/init.p1-common.rc \
-	device/samsung/p1-common/usb.rc:root/usb.rc \
-	device/samsung/p1-common/usb.rc:recovery/root/usb.rc \
+	device/samsung/p1-common/init.usb.rc:root/init.usb.rc \
+	device/samsung/p1-common/init.usb.rc:recovery/root/init.usb.rc \
 	device/samsung/p1-common/lpm.rc:root/lpm.rc
 
 # Prebuilt kl keymaps
