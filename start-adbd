@@ -1,0 +1,11 @@
+#!/system/bin/sh
+
+while true
+do
+	pidof adbd > /dev/null 2>&1
+	if [ $? == 1 ]; then
+		/sbin/adbd &
+	fi
+	sleep 5
+done
+
