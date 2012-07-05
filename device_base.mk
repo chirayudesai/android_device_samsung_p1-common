@@ -30,7 +30,8 @@ PRODUCT_COPY_FILES += \
 	device/samsung/p1-common/init.p1-common.rc:root/init.p1-common.rc \
 	device/samsung/p1-common/init.usb.rc:root/init.usb.rc \
 	device/samsung/p1-common/init.usb.rc:recovery/root/init.usb.rc \
-	device/samsung/p1-common/lpm.rc:root/lpm.rc
+	device/samsung/p1-common/lpm.rc:root/lpm.rc \
+	device/samsung/p1-common/start-adbd:root/sbin/start-adbd
 
 # hax
 PRODUCT_COPY_FILES += \
