@@ -29,6 +29,8 @@ TARGET_KERNEL_BINARIES: $(KERNEL_OUT) $(KERNEL_CONFIG) $(KERNEL_HEADERS_INSTALL)
 
 $(INSTALLED_BOOTIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET) $(PRODUCT_OUT)/utilities/flash_image $(PRODUCT_OUT)/utilities/busybox $(PRODUCT_OUT)/utilities/make_ext4fs $(PRODUCT_OUT)/utilities/erase_image
 	$(ACP) -fp $< $@
+	$(ACP) -fp $(PRODUCT_OUT)/utilities/busybox $(PRODUCT_OUT)/root/sbin/busybox
 
 $(INSTALLED_RECOVERYIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET)
 	$(ACP) -fp $< $@
+
