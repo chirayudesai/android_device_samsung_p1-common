@@ -116,10 +116,27 @@ loglevel 3
 on fs
 # mount mtd partitions
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
-    mount yaffs2 mtd@system /system
-    mount yaffs2 mtd@system /system ro remount
-    mount yaffs2 mtd@userdata /data nosuid nodev
-    mount yaffs2 mtd@cache /cache nosuid nodev
+    #mount yaffs2 mtd@system /system
+    #mount yaffs2 mtd@system /system ro remount
+    #mount yaffs2 mtd@userdata /data nosuid nodev
+    #mount yaffs2 mtd@cache /cache nosuid nodev
+
+# for dual boot
+    mkdir /dev/block/vold
+
+    start mknod_sdcard
+    wait /dev/block/vold/179:1
+    start mount_sdcard
+    wait /mnt/sdcard/multiboot/FC09/zImage
+    start losetup_system
+    wait /sys/devices/virtual/block/loop2/loop/backing_file
+    start losetup_data
+    wait /sys/devices/virtual/block/loop3/loop/backing_file
+    start losetup_cache
+    wait /sys/devices/virtual/block/loop4/loop/backing_file
+    mount ext4 /dev/block/loop2 /system ro noatime
+    mount ext4 /dev/block/loop3 /data nosuid nodev noatime
+    mount ext4 /dev/block/loop4 /cache nosuid nodev noatime
 
 on post-fs
     # once everything is setup, no need to modify /
@@ -488,3 +505,29 @@ service mdnsd /system/bin/mdnsd
     socket mdnsd stream 0660 mdnsr inet
     disabled
     oneshot
+
+# for dual boot
+service mknod_sdcard /sbin/busybox mknod /dev/block/vold/179:1 b 179 1
+        user root
+        disabled
+        oneshot
+
+service mount_sdcard /sbin/busybox mount -t vfat /dev/block/vold/179:1 /mnt/sdcard
+        user root
+        disabled
+        oneshot
+
+service losetup_system /sbin/busybox losetup /dev/block/loop2 /sdcard/dualboot/jb/system.ext4.img
+        user root
+        disabled
+        oneshot
+
+service losetup_data /sbin/busybox losetup /dev/block/loop3 /sdcard/dualboot/jb/data.ext4.img
+        user root
+        disabled
+        oneshot
+
+service losetup_cache /sbin/busybox losetup /dev/block/loop4 /sdcard/dualboot/jb/cache.ext4.img
+        user root
+        disabled
+        oneshot
