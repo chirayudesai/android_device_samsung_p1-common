@@ -124,10 +124,9 @@ on fs
 # for dual boot
     mkdir /dev/block/vold
 
-    start mknod_sdcard
+   #start mknod_sdcard
     wait /dev/block/vold/179:1
     start mount_sdcard
-    wait /mnt/sdcard/multiboot/FC09/zImage
     start losetup_system
     wait /sys/devices/virtual/block/loop2/loop/backing_file
     start losetup_data
